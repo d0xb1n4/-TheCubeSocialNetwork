@@ -1,0 +1,223 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+<link href="{% static 'css/account_settings.css' %}" rel="stylesheet" type="text/css">
+
+
+<a onclick="SignOut();">
+    <img style="position: absolute; top: 0; right: 0;" class="icon pointer middle" src="{% static 'img/icons/exit.png' %}">
+</a>
+<style>
+    .conditions {
+        display: none;
+    }
+
+    .conditions p {
+        font-size: 15px;
+    }
+
+    .link-conditions {
+        font-size: 15px;
+    }
+
+    .inline-block {
+        display: inline-block;
+    }
+
+    .inline-block * {
+        display: inline-block;
+    }
+</style>
+<div class="settings-menu">
+    <div class="point">
+        <h1>Профиль</h1>
+        <div class="inline-block">
+            <h3>Фото профиля</h3>
+            <a onclick="ShowConditions(0);" class="link-conditions" id="link-conditions0"
+               href="#open-nickname-conditions">
+                <p> • Тебования ⬇</p>
+            </a>
+        </div>
+        <input id="profile-avatar" accept="image/*" style="border: 1px solid gray; width: 235px;" type="file"><br><br>
+        <div class="conditions" id="conditions0">
+            <p>• Желательно устанавливайте квадратное фото для профиля</p>
+            <p>• Максимальный размер - 10мб (10 МегаБайт)</p>
+        </div>
+
+        <div class="inline-block">
+            <h3>Ник</h3>
+            <a onclick="ShowConditions(1);" class="link-conditions" id="link-conditions1"
+               href="#open-nickname-conditions">
+                <p> • Тебования ⬇</p>
+            </a>
+        </div>
+        <input id="nickname-edit" value="{{ request.user.username }}" maxlength="20">
+        <div class="conditions" id="conditions1">
+            <p>• Ник должен быть уникален</p>
+            <p>• Ник может состоять только из цифр, букв латинского алфавита и символов точки и нижнего
+                подчёркивания</p>
+            <p>• Длинна не должна превышать 20 символов</p>
+        </div>
+
+
+        <div class="inline-block">
+            <h3>Имя пользователя</h3>
+            <a onclick="ShowConditions(2);" class="link-conditions" id="link-conditions2"
+               href="#open-nickname-conditions">
+                <p> • Тебования ⬇</p>
+            </a>
+        </div>
+        <input id="username-edit" value="{{ request.user.nickname }}" maxlength="20">
+        <div class="conditions" id="conditions2">
+            <p>• Длинна не должна превышать 20 символов</p>
+        </div>
+
+        <h3>Эмодзи статуса</h3>
+        <input id="status_emoji-edit" maxlength="10" value="{{ request.user.status_emoji }}">
+
+        <h3>Статус</h3>
+        <input id="status-edit"  value="{{ request.user.status }}">
+
+        <br><br>
+        <button onclick="EditProfile();">Сохранить</button>
+        <button style="margin-left: 10px;">Сбросить</button>
+    </div>
+
+    <div class="point">
+        <br>
+        <h1>Пароль</h1>
+        <h3>Старый пароль</h3>
+        <input>
+
+        <div class="inline-block">
+            <h3>Новый пароль</h3>
+            <a onclick="ShowConditions(3);" class="link-conditions" id="link-conditions3"
+               href="#open-nickname-conditions">
+                <p> • Тебования ⬇</p>
+            </a>
+        </div>
+        <input>
+        <div class="conditions" id="conditions3">
+            <p>• Минимальная длинна пароля - 8 символов</p>
+            <p>• Не используйте слишком простой пароль</p>
+            <p>• Пароль должен состоять из цифр, букв и символов</p>
+            <p>• Пароль не должен быть похож на другую информацию в вашем профиле</p>
+        </div>
+        <br><br>
+        <button>Сохранить</button>
+        <button style="margin-left: 10px;">Сбросить</button>
+        <br><br>
+    </div>
+    <div class="point">
+        <br>
+        <h1>Приватность</h1>
+        <div class="inline-block">
+            <h3>Скрыть записи</h3>
+            <a onclick="ShowConditions(4);" class="link-conditions" id="link-conditions4"
+               href="#open-nickname-conditions">
+                <p> • Описание ⬇</p>
+            </a>
+        </div>
+        <div class="checkbox-container">
+            <input type="checkbox">
+            <p>- Да/нет</p>
+        </div>
+        <div class="conditions" id="conditions4">
+            <p>• Скрывает все ваши записи и их количество от других пользователей</p>
+        </div>
+        <br>
+        <div class="inline-block">
+            <h3>Скрыть статус</h3>
+            <a onclick="ShowConditions(5);" class="link-conditions" id="link-conditions5"
+               href="#open-nickname-conditions">
+                <p> • Описание ⬇</p>
+            </a>
+        </div>
+        <div class="checkbox-container">
+            <input type="checkbox">
+            <p>- Да/нет</p>
+        </div>
+        <div class="conditions" id="conditions5">
+            <p>• Скрывает текст и эмодзи статуса</p>
+        </div>
+        <br>
+        <div class="inline-block">
+            <h3>Скрыть sub</h3>
+            <a onclick="ShowConditions(6);" class="link-conditions" id="link-conditions6"
+               href="#open-nickname-conditions">
+                <p> • Описание ⬇</p>
+            </a>
+        </div>
+        <br>
+        <div class="checkbox-container">
+            <input type="checkbox">
+            <p>- Да/нет</p>
+        </div>
+        <div class="conditions" id="conditions6">
+            <p>• В этом меню отображается количество ваших подписчиков, подписок и постов</p>
+        </div>
+
+        <div class="inline-block">
+            <h3>Скрыть подписчиков</h3>
+            <a onclick="ShowConditions(7);" class="link-conditions" id="link-conditions7"
+               href="#open-nickname-conditions">
+                <p> • Описание ⬇</p>
+            </a>
+        </div>
+        <div class="checkbox-container">
+            <input type="checkbox">
+            <p>- Да/нет</p>
+        </div>
+        <div class="conditions" id="conditions7">
+            <p>• Скрывает ваших подписчиков из раздела профиль. Количество подписчиков будет отображаться. Чтобы скрыть это - отключите sub</p>
+        </div>
+
+        <div class="inline-block">
+            <h3>Скрыть подписки</h3>
+            <a onclick="ShowConditions(7);" class="link-conditions" id="link-conditions7"
+               href="#open-nickname-conditions">
+                <p> • Описание ⬇</p>
+            </a>
+        </div>
+        <div class="checkbox-container">
+            <input type="checkbox">
+            <p>- Да/нет</p>
+        </div>
+        <div class="conditions" id="conditions7">
+            <p>• Скрывает ваши подписки в разделе профиля. Количество подписок будет отображаться. Чтобы скрыть это - отключите sub</p>
+        </div>
+        <br><br>
+        <button>Сохранить</button>
+        <button style="margin-left: 10px;">Сбросить</button>
+        <br><br><br><br><br>
+    </div>
+</div>
+<script>
+function ShowConditions(conditions_id) {
+    document.getElementById('conditions' + conditions_id).style.display = 'block';
+    document.getElementById('link-conditions' + conditions_id).onclick = function() {HideConditions(conditions_id);}
+}
+
+function HideConditions(conditions_id) {
+    document.getElementById('conditions' + conditions_id).style.display = 'none';
+    document.getElementById('link-conditions' + conditions_id).onclick = function() {ShowConditions(conditions_id);}
+}
+
+var params = window
+.location
+.search
+.replace('?','')
+.split('&')
+.reduce(
+    function(p,e){
+        var a = e.split('=');
+        p[ decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
+        return p;
+    },
+    {}
+);
+
+</script>
+
+{% endblock %}

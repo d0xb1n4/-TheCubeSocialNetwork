@@ -1,0 +1,154 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+<script>
+    function ShowStatus() {
+        document.getElementById('status-text').style.opacity = '100%';
+        document.getElementById('status-emoji').onclick = function () {HideStatus();};
+    }
+
+    function HideStatus() {
+        document.getElementById('status-text').style.opacity = '0%';
+        document.getElementById('status-emoji').onclick = function () {ShowStatus();};
+    }
+</script>
+
+<div class="account-block">
+    <div class="avatar-block">
+        {% if user == request.user %}
+        <img onclick="location.href = '/account/{{ user.username}}/settings?back=/account/{{ user.username}}/';"
+             class="account-settings-icon account-avatar" src="{% static 'img/icons/settings.png' %}">
+        {% endif %}
+        {% if user.avatar %}
+        <img class="account-avatar" src="{{ user.avatar.url }}">
+        {% else %}
+        <img class="account-avatar" src="{% static 'img/icons/account.png' %}">
+        {% endif %}
+        <div class="status-bar">
+            <span class="status-emoji">
+                <h1 id="status-emoji" onclick="ShowStatus();">{{ user.status_emoji }}</h1>
+            </span>
+            <p id="status-text" class="status-text">{{ user.status }}</p>
+        </div>
+    </div>
+
+    <div class="names-block">
+        <h1 class="nickname">{{ user.nickname }}</h1>
+        <br>
+        <a class="username" href="{% url 'account_view' user.username %}">
+            <p>@{{ user.username }}</p>
+        </a>
+    </div>
+</div>
+{% if user.show_sub_info %}
+<center>
+    <div class="account-toolbar">
+        <a style="color: black;" href="http://127.0.0.1:8000/account/{{ user.username }}/subscribers/?back=/account/{{ user.username }}/">
+            <div class="account-tool-main">
+                <h3 style="margin-top: -5px;" id="subscribers_count">
+                    {% if user.show_subscribers or user == request.user %} {{ user.subscribers.all.count }} {% else %} ?
+                    {% endif %}
+                </h3>
+                <p style="margin-top: -20px;">Подписчиков</p>
+
+            </div>
+        </a>
+        <a style="color: black;" href="http://127.0.0.1:8000/account/{{ user.username }}/subscriptions/?back=/account/{{ user.username }}/">
+            <div class="account-tool-main">
+                <h3 style="margin-top: -5px;">{% if user.show_subscriptions or user == request.user %} {{ user.subscriptions.all.count }} {% else %} ? {% endif %}</h3>
+                <p style="margin-top: -20px;">Подписок</p>
+            </div>
+        </a>
+        <div class="account-tool">
+            <h3 style="margin-top: -5px;">0</h3>
+            <p style="margin-top: -20px;">Записей</p>
+        </div>
+    </div>
+</center>
+<br><br><br><br><br>
+{% else %}
+<center>
+    <p>
+        Пользователь скрыл эту информацию.
+    </p>
+</center>
+{% endif %}
+<center>
+    {% if request.user in user.subscribers.all %}
+    <button id="subscribe_button" onclick="SubscribeToUser('{{ user.username }}');">
+        Отписаться
+    </button>
+    {% else %}
+    <button id="subscribe_button" onclick="SubscribeToUser('{{ user.username }}');">
+        Подписаться
+    </button>
+    {% endif %}
+</center>
+
+<style>
+    .conditions {
+        display: none;
+    }
+</style>
+<div class="post_create-block">
+    <h3>Тема поста</h3>
+    <input id="post-theme">
+
+    <a style="color: black;" onclick="ShowPostCreateForm();" class="link-conditions" id="link-conditions2"
+       href="#open-nickname-conditions">
+        <p style="">Перейти к созданию</p>
+    </a>
+
+    <div class="conditions" id="conditions2">
+        <h3>Текст</h3>
+        <textarea id="post-text"></textarea>
+
+        <a style="color: black;" onclick="ShowConditions(3);" class="link-conditions" id="link-conditions3"
+           href="#open-nickname-conditions">
+            <img style="left: -15px; position: absolute; cursor: pointer;" class="icon small"
+                 src="{% static 'img/icons/clip.png' %}">
+            <p style="left: 40px; position: absolute; margin-top: 25px;">Вложение</p>
+            <br><br><br>
+        </a>
+        <div class="conditions" id="conditions3">
+            <p>• Загрузить изображение</p>
+            <input id="post-image" style="border: 1px solid gray;" type="file" accept="image/*">
+    <!--        <p>• Загрузить музыку</p>-->
+    <!--        <input id="post-music" style="border: 1px solid gray;" type="file" accept="audio/mp3">-->
+    <!--        <p>• Загрузить документ</p>-->
+    <!--        <input id="post-document" style="border: 1px solid gray;" type="file" accept="*/*">-->
+        </div>
+        <br>
+        <center>
+            <button onclick="CreatePost();">Опубликовать</button>
+        </center>
+        <br><br><br>
+    </div>
+
+</div>
+<br><br><br><br><br><br><br><br>
+{% if posts.count %}
+    <div class="posts" id="posts" style="margin-top: 0px;">
+    {% for post in posts %}
+        <a href="/post/{{ post.pk }}?back=/account/{{ user.username }}/" style="color: black;">
+            <div class="post">
+                {% if post.image %}
+                <img class="post-short-img" src="{{ post.image.url }}">
+                {% else %}
+                <div class="post-short-non-img"></div>
+                {% endif %}
+                <h3>{{ post.text|truncatechars:20 }}</h3>
+            </div>
+        </a>
+    {% endfor %}
+    </div>
+{% else %}
+    <center>
+        <h1>
+            Пользователь ещё не выкладывал записей.
+        </h1>
+    </center>
+{% endif %}
+
+{% endblock %}

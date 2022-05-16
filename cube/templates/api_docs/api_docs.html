@@ -1,0 +1,87 @@
+{% extends 'index.html' %}
+{% load custom_filters %}
+{% load static %}
+
+
+{% block content %}
+<center>
+    <img src="{% static 'img/icons/api.gif' %}">
+    <h1 style="font-weight: 100;">CuBe API.</h1>
+</center>
+<br><br><br>
+<div class="api-docs-block">
+    <div class="header-block">
+        <h1 style="font-weight: 100;">API документация.</h1>
+        <h2 style="font-weight: 100;">Меняй мир к лучшему</h2>
+    </div>
+
+    <a style="color: black;" onclick="ShowConditions(1);" class="link-conditions" id="link-conditions1"
+       href="#open-nickname-conditions">
+        <h2 style="font-weight: 100; left: 40px; margin-top: 25px;">↓ 1. Получение токена. Введение.</h2>
+    </a>
+    <div class="conditions" style="display: none;" id="conditions1">
+
+        <h3 style="font-weight: 100;">Получение токена авторизации.</h3>
+
+        <p>Ваш токен: </p>
+        <div class="info">
+            <p class="code-url" id="user-api-token"></p>
+        </div>
+        <p class="p-block">
+            Символ "🔒" (Замок) обозначает закрытый или бесполезный для пользователького api метод.
+        </p>
+        <script>document.getElementById('user-api-token').innerHTML = localStorage.getItem('token');</script>
+    </div>
+
+    <br>
+
+    <a style="color: black;" onclick="ShowConditions(2);" class="link-conditions" id="link-conditions2"
+       href="#open-nickname-conditions">
+        <h2 style="font-weight: 100; left: 40px; margin-top: 25px;">↓ 2. Методы.</h2>
+    </a>
+    <div class="conditions" style="display: none; padding: 0;" id="conditions2">
+        <div class="header-block">
+            <h2 class="code" style="font-weight: 100;">🔒 api/sign/in/</h2>
+            <h3 style="font-weight: 100;">метод авторизации в пределах одной сессии.</h3>
+        </div>
+        <p class="p-block">
+            Уточнение: система сайта строится на проверке токена при обращении к любому запросу по api.<br>
+            Токен хранится в localStorage.
+        </p>
+        <div class="div-code">
+            <code>
+                <span class="code">console</span>.log(<span class="code">localStorage</span>.getItem(</span><span class="code-url">'token'</span>));
+            </code>
+        </div>
+    </div>
+
+    <br>
+
+    <a style="color: black;" onclick="ShowConditions(3);" class="link-conditions" id="link-conditions3"
+       href="#open-nickname-conditions">
+        <h2 style="font-weight: 100; left: 40px; margin-top: 25px;">↓ 3. Примеры кода на Python.</h2>
+    </a>
+    <div class="conditions" style="display: none;" id="conditions3">
+        <div class="div-code">
+            <code>
+                <span class="code">import</span> requests<br><br>
+
+                <span class="code">url</span> = <span class="code-url">'http://127.0.0.1:8000/api/create/comment/'<p><br><br>
+
+                <span class="code">data</span> = {<br>
+                <span class="code-url">'token'</span>: '123',<br>
+                    <span class="code-url">'post_id'</span>: 7,<br>
+                    <span class="code-url">'text'</span>: '123'<br>
+                }<br><br>
+
+                <span class="code">print(</span>requests.post(<br>
+                        url=url,<br>
+                        data=data<br>
+                    ).json()<span class="code">)</span>
+            </code>
+        </div>
+    </div>
+    <br><br><br><br>
+</div>
+
+{% endblock %}

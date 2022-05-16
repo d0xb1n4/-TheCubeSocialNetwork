@@ -1,0 +1,860 @@
+* {
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  background: gray;
+  border-radius: 50px;
+}
+
+*::-webkit-scrollbar-track {
+  width: 3px;
+  background: rgb(200, 200, 200);
+  border-radius: 50px;
+}
+
+*::-webkit-scrollbar-thumb {
+  width: 3px;
+  background: rgb(50, 50, 50);
+  border-radius: 0px;
+}
+
+input, textarea {
+    text-decoration: none;
+    outline:none;
+}
+
+a {
+    color: gray;
+    text-decoration: none;
+    transition: 0.5s;
+}
+a:hover {
+    color: black;
+}
+input, textarea {
+    padding: 10px;
+    width: 230px;
+    font-size: 17px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+textarea {
+    min-height: 100px;
+}
+
+
+.toolbar {
+    display: inline-block;
+    position: fixed;
+    bottom: 120px;
+    right: 30px;
+    padding: 30px
+    background: white;
+    transition: 0.5s;
+    border-radius: 50px;
+    background: rgb(210, 210, 210);
+    z-index: 999;
+    display: block;
+}
+.tool {
+    display: inline-block;
+    padding: 10px;
+}
+
+.add {
+    margin-left: 50px;
+}
+
+.tool img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.hide-toolbar {
+    display: inline-block;
+    position: fixed;
+    bottom: 30px;
+    right: 32px;
+    background: white;
+    transition: 0.5s;
+    border-radius: 50px;
+    background: rgb(210, 210, 210);
+    display: block;
+    padding: 8px;
+    height: 50px;
+}
+
+.hide-toolbar img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.search-block {
+    width: 300px;
+    padding: 10px;
+    position: fixed;
+    margin-left: calc(50% - 170px);
+    bottom: -150px;
+    transition: 0.5s;
+}
+
+.search-block input {
+    width: 180px;
+}
+
+#search-close-icon {
+    transition: 1s;
+    bottom: -150px;
+    margin-left: -80px;
+    position: fixed;
+}
+
+.notify {
+    display: inline-block;
+    position: fixed;
+    top: 10px;
+    left: -150px;
+    transition: 0.5s;
+}
+
+.notify h3, img {
+    display: inline-block;
+}
+
+.notify h3 {
+    position: absolute;
+    margin-top: 0px;
+    background: white;
+}
+
+#hide-notify-button {
+    transition: 0.5s;
+    display: none;
+    left: 10px;
+    top: 50px;
+    position: fixed;
+}
+
+
+.account-block {
+
+}
+
+.account-block * {
+    display: inline-block;
+    width: 250px;
+    margin-left: calc(50% - 155px);
+}
+
+
+.account-avatar {
+    border: 1px solid rgb(100, 100, 100);
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.names-block {
+    position: absolute;
+    top: -10px;
+    left: 120px;
+}
+
+.names-block .nickname {
+    font-size: 50px;
+}
+
+.names-block .username {
+    position: absolute;
+    font-size: 20px;
+    top: 70px;
+    left: 30px;
+}
+
+.account-toolbar {
+    display: inline-block;
+    position: absolute;
+    top: 140px;
+    left: calc(50% - 225px);
+}
+
+
+.account-tool-main {
+    display: inline-block;
+    padding-right: 30px;
+    padding-left: 30px;
+    border-right: 1px solid gray;
+}
+
+.account-tool {
+    display: inline-block;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.account-tool img {
+    margin-top: 10px;
+    width: 32px;
+    height: 32px;
+}
+
+
+button {
+    padding: 10px;
+    min-width: 100px;
+    border: 1px solid black;
+    background: white;
+    font-size: 17px;
+    transition: 0.5s;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+button:hover {
+    background: black;
+    color: white;
+}
+
+.user-block img {
+    width: 100px;
+    height: 100px;
+    margin-left: 30px;
+    border-radius: 50%;
+    border: 1px solid black;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    padding: 15px;
+    transition: 0.5s;
+}
+
+.small {
+    width: 32px;
+    height: 32px;
+}
+
+.middle {
+    width: 40px;
+    height: 40px;
+}
+
+.big {
+    width: 64px;
+    height: 64px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.pointer:hover {
+    background: rgb(200, 200, 200);
+    border-radius: 50%;
+}
+
+.account-settings-icon {
+    position: absolute;
+    border: none;
+    width: 40px;
+    height: 40px;
+    left: -29px;
+    top: 9px;
+    cursor: pointer;
+    transition: 0.5s;
+    padding: 30px;
+    opacity: 0;
+}
+
+.account-settings-icon:hover  {
+    background: white;
+    opacity: 100%;
+}
+
+.settings-menu {
+    position: absolute;
+    width: 300px;
+    left: calc(50% - 150px);
+}
+
+.toolbar-tools {
+    position: fixed;
+    bottom: -5px;
+    cursor: pointer;
+}
+
+.checkbox-container {
+    display: inline-block;
+}
+
+.checkbox-container * {
+    display: inline-block;
+}
+
+.checkbox-container input {
+    margin-left: -40px;
+}
+
+.checkbox-container p {
+    margin-left: -40px;
+}
+
+.status-bar {
+    position: absolute;
+    left: 0;
+    padding: 10px;
+}
+
+.status-bar .status-emoji {
+    position: absolute;
+    top: 70px;
+    border-radius: 50%;
+    background: rgb(245, 245, 245);
+    width: 30px;
+    height: 30px;
+    padding: 3px;
+    font-size: 20px;
+    cursor: pointer;
+    left: 60px;
+    color: black;
+    border: 1px solid black;
+    padding: 5px;
+    z-index: 999;
+}
+
+.status-bar .status-emoji h1 {
+    position: absolute;
+    top: -10px;
+    border-radius: 50%;
+    font-size: 20px;
+    left: 138px;
+    color: black;
+    padding: 5px;
+    z-index: 999;
+}
+
+.status-bar .status-text {
+    position: absolute;
+    top: 55px;
+    left: 105px;
+    opacity: 0;
+    background: rgb(245, 245, 245);
+    border-radius: 15px;
+    z-index: 9;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+
+.post_create-block {
+    position: absolute;
+    width: 300px;
+    left: calc(50% - 150px);
+    display: inline-block;
+}
+
+.post_create-block input {
+    width: 300px;
+}
+
+
+.post_create-block textarea {
+    width: 300px;
+    height: 200px;
+}
+
+.post-owner-block img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.post-owner-block {
+    position: absolute;
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.subscribe-button {
+    position: absolute;
+    margin-left: 200px;
+}
+
+.post-owner-block * {
+    display: inline-block;
+}
+
+.post-owner-block h3 {
+    position: absolute;
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    font-weight: light;
+    margin-top: -30px;
+    font-size: 25px;
+    width: 150px;
+    word-break: none;
+}
+
+.post-owner-block p {
+    position: absolute;
+    margin-top: -15px;
+    color: rgb(150, 150, 150);
+}
+
+.post_view-block {
+    position: absolute;
+    width: 800px;
+    height: 400px;
+    left: 50%;
+    top: calc(50% - 50px);
+
+    transform: translate(-50%, -50%);
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.post_view-block .post-image {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-left: calc(50% - 400px);
+    margin-top: 0px;
+}
+
+.post_view-block .post-non-image {
+    width: 400px;
+    height: 400px;
+    border-radius: 5px;
+    margin-left: calc(50% - 400px);
+    margin-top: 0px;
+    background: rgb(230, 230, 230);
+}
+
+.post_view-block .post-music {
+    width: 300px;
+}
+
+.post_view-block .post-text {
+    font-size: 18px;
+    padding: 25px;
+    margin-left: 400px;
+    margin-top: -295px;
+    height: 200px;
+    overflow: auto;
+}
+
+
+.icons {
+    position: absolute;
+    display: inline-block;
+    left: 420px;
+    top: 70px;
+}
+
+.calendar-icon, .like-icon {
+    margin-left: 30px;
+}
+
+.like-icon {
+    display: inline-block;
+}
+
+.like-icon img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.like-icon img:hover {
+    background: rgb(220, 220, 220);
+}
+
+.like-icon p {
+    position: absolute;
+    margin-top: -42px;
+    margin-left: 55px;
+    font-size: 18px;
+}
+
+
+
+.comments-icon {
+    display: inline-block;
+}
+
+.comments-icon img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.comments-icon img:hover {
+    background: rgb(220, 220, 220);
+}
+
+.comments-icon p {
+    position: absolute;
+    margin-top: -42px;
+    margin-left: 55px;
+    font-size: 18px;
+}
+
+
+.hashtag-icon {
+    display: inline-block;
+    top: 295px;
+    left: 0;
+    position: absolute;
+}
+
+.hashtag-icon * {
+    display: inline-block;
+}
+
+.hashtag-icon img {
+    width: 25px;
+    height: 25px;
+}
+
+.hashtag-icon p {
+    position: absolute;
+    font-size: 18px;
+    margin-top: 17px;
+    display: inline-block;
+    width: 400px;
+}
+
+.delete-icon {
+
+}
+
+.delete-icon {
+    display: inline-block;
+    top: 295px;
+    left: 0;
+    position: absolute;
+}
+
+.delete-icon * {
+    display: inline-block;
+}
+
+.delete-icon img {
+    width: 25px;
+    height: 25px;
+}
+
+.delete-icon p {
+    position: absolute;
+    font-size: 18px;
+    margin-top: 17px;
+    display: inline-block;
+    width: 400px;
+}
+
+
+.calendar-icon {
+    display: inline-block;
+}
+
+.calendar-icon * {
+    display: inline-block;
+}
+
+.calendar-icon img {
+    width: 25px;
+    height: 25px;
+}
+
+.calendar-icon p {
+    position: absolute;
+    font-size: 18px;
+    margin-top: 17px;
+    display: inline-block;
+    width: 200px;
+}
+
+.post-short-img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.posts {
+    display: inline-block;
+}
+
+.post {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 15px;
+    margin-top: 15px;
+}
+
+.post-short-non-img {
+    width: 250px;
+    height: 250px;
+    border-radius: 5px;
+    background: rgb(230, 230, 230);
+}
+
+.comments {
+    overflow: auto;
+    overflow-x: hidden;
+    position: absolute;
+    top: 190px;
+    left: 440px;
+    height: 180px;
+    width: 330px;
+}
+
+.comment {
+    display: inline-block;
+    border-left: 1px solid gray;
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
+.comment-owner {
+
+}
+
+.comment .owner-avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid gray;
+    object-fit: cover;
+}
+
+.comment .owner-nickname{
+    display: inline-block;
+}
+
+.comment .comment-text {
+    margin-top: -10px;
+}
+
+.comment-likes {
+    margin-left: 250px;
+    margin-top: -150px;
+    display: inline-block;
+}
+
+.comment-likes p {
+    display: inline-block;
+}
+
+.api-docs-block {
+    width: 1000px;
+    margin-left: calc(50% - 500px);
+}
+
+.api-docs-block .conditions {
+    margin-top: 70px;
+    margin-left: 10px;
+}
+
+.header-block {
+    border-left: 2px solid gray;
+    padding: 20px;
+}
+
+
+
+.code {
+    color: rgb(250, 100, 100);
+}
+
+.code-url {
+    color: rgb(100, 200, 100);
+}
+
+.div-code {
+    background: rgb(240, 240, 240);
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 400px;
+}
+
+.info {
+    background: rgb(230, 230, 230);
+    padding: 10px;
+    border: 5px;
+    width: 400px;
+}
+
+.p-block {
+    max-width: 300px;
+}
+
+
+.comment {
+    margin-top: 20px;
+    display: block;
+}
+
+
+.comment-owner-block .owner-nickname {
+    position: absolute;
+    margin-top: -1px;
+    margin-left: 10px;
+    font-size: 15px;
+}
+
+.comment-owner-block .owner-username {
+    position: absolute;
+    margin-top: -20px;
+    margin-left: 40px;
+    font-size: 15px;
+}
+
+.comment-owner-block .owner-avatar {
+    width: 30px;
+    height: 30px;
+}
+
+.comment-likes {
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 200px;
+}
+
+.comment-likes img {
+    width: 20px;
+    height: 20px;
+}
+
+.comment-likes p {
+    position: absolute;
+    margin-top: 2px;
+    font-size: 15px;
+    margin-left: 5px;
+}
+
+
+.comment-delete  {
+    position: absolute;
+    margin-top: -30px;
+    left: 40px;
+}
+
+.comment-delete img {
+    width: 20px;
+    height: 20px;
+}
+
+.comment-delete p {
+    position: absolute;
+    margin-top: -22px;
+    left: 25px;
+    font-size: 15px;
+}
+
+.delete-comment img {
+    width: 20px;
+    height: 20px;
+}
+
+.resolution_not_supported {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .post {
+        display: inline-block;
+        border: none;
+        border-bottom: 1px solid gray;
+        padding: 10px;
+        width: calc(100% - 30px);
+        border-radius: 0px;
+        margin: 5px;
+        margin-top: 15px;
+    }
+
+    .post-short-img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+
+    .post-short-non-img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+
+    .post-owner-block img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .post-owner-block {
+        position: absolute;
+        display: inline-block;
+        margin-left: 20px;
+        margin-top: 10px;
+    }
+
+    .subscribe-button {
+        position: absolute;
+        margin-left: 200px;
+    }
+
+    .post-owner-block * {
+        position: static;
+        display: inline-block;
+    }
+
+    .post-owner-block h3 {
+        position: static;
+        font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+        font-weight: light;
+        margin-top: -30px;
+        font-size: 25px;
+        width: 150px;
+        word-break: none;
+    }
+
+    .post-owner-block p {
+        position: static;
+        margin-top: -15px;
+        color: rgb(150, 150, 150);
+    }
+
+    .post_view-block {
+        display: none;
+    }
+
+    .resolution_not_supported {
+        position: absolute;
+        left: calc(50% - 170px);
+        top: 50px;
+        font-size: 40px;
+        display: block;
+        width: 220px;
+    }
+}

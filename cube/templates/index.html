@@ -1,0 +1,92 @@
+{% load static %}
+<!doctype html>
+
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
+        <script src="{% static 'js/static_page_functions.js' %}"></script>
+        <script src="{% static 'js/conditions.js' %}"></script>
+        <script src="{% static 'js/index.js' %}"></script>
+        <script src="{% static 'js/notify.js' %}"></script>
+        <script src="{% static 'js/cookie.js' %}"></script>
+
+        <title>{{ page_title }}</title>
+
+    </head>
+    <body id="body">
+        <a id="back-button" style="" href="">
+            <img style="position: absolute; top: 0; " class="icon pointer middle" src="{% static 'img/icons/back.png' %}">
+        </a>
+
+        {% block content %}
+
+        {% endblock %}
+
+        <div class="toolbar" id="main-toolbar" style="margin-top: 150px;">
+            <center>
+                {% if user.is_authenticated %}
+
+                <div class="tool">
+                    <a href="{% url 'account_view' request.user.username %}">
+                        <img src="{% static 'img/icons/account.png' %}">
+                    </a>
+                </div>
+
+                {% else %}
+                <div class="tool">
+                    <a href="{% url 'sign' %}">
+                        <img src="{% static 'img/icons/account.png' %}">
+                    </a>
+                </div>
+                {% endif %}
+                <br>
+                <div class="tool">
+                    <a href="/">
+                        <img src="{% static 'img/icons/hashtag.png' %}">
+                    </a>
+                </div>
+                <br>
+
+<!--                <a href="#search-block" id="search-button" onclick="ShowSearch();">-->
+<!--                    <div class="tool add">-->
+<!--                        <img id="search-icon" width="50" height="50" src="{% static 'img/icons/search.png' %}">-->
+<!--                    </div>-->
+<!--                </a>-->
+<!--                {% if user.is_authenticated %}-->
+<!--                <a href="{% url 'post_create' %}">-->
+<!--                    <div class="tool add">-->
+<!--                        <img src="{% static 'img/icons/create.png' %}">-->
+<!--                    </div>-->
+<!--                </a>-->
+<!--                {% endif %}-->
+<!--                <div class="search-block" id="search-block">-->
+<!--                    <input type="search">-->
+<!--                    <a href="#search"><h3>Искать</h3></a>-->
+<!--                </div>-->
+            </center>
+        </div>
+
+        <div class="hide-toolbar">
+            <a href="#">
+                <img onclick="HideToolbar();" id="toolbar-tools-img" src="{% static 'img/icons/hide.png' %}">
+            </a>
+        </div>
+
+        <div class="notify" id="notify">
+            <img width="32px" height="32px" src="{% static 'img/icons/danger.png' %}">
+            <h3 id="notify-text"></h3>
+            <a href="#close-notify" onclick="HideNotify();">
+                <img id="hide-notify-button" width="32px" height="32px" src="{% static 'img/icons/close-search.png' %}">
+            </a>
+        </div>
+        <script>
+                showBackArrow();
+                checkToolbar();
+        </script>
+    </body>
+</html>

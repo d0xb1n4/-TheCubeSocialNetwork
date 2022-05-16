@@ -1,0 +1,8 @@
+<script>
+    lo = new WebSocket("ws://localhost:8000/ws/live-score/1?token=[YOUR TOKEN]");
+    lo.onmessage = (data) => console.log(data);
+    lo.onopen = () => {
+        console.log("sending city");
+        lo.send(JSON.stringify({"game_city": 1}));
+    }
+</script>

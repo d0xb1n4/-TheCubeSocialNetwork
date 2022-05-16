@@ -1,0 +1,53 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+<link href="{% static 'css/sign_page.css' %}" rel="stylesheet" type="text/css">
+
+<div class="sign-block" id="sign-in-block">
+    <center>
+        <h1>Авторизация</h1>
+    </center>
+    <h3 class="inside">Имя пользователя</h3>
+    <center>
+        <input id="SignIn-username">
+    </center>
+    <h3 class="inside">Пароль</h3>
+    <center>
+        <input id="SignIn-password" type="password">
+    </center>
+    <a href="#auth">
+        <h3 class="inside" onclick="SignIn();">Войти</h3>
+    </a>
+    <a href="#signUp">
+        <h3 class="inside" onclick="ShowSignUpBlock();">Регистрация</h3>
+    </a>
+</div>
+<div class="sign-block" id="sign-up-block">
+    <center>
+        <h1>Регистрация</h1>
+    </center>
+    <h3 class="inside">Ник</h3>
+    <center>
+        <input id="SignUp-username">
+    </center>
+    <h3 class="inside">Имя</h3>
+    <center>
+        <input id="SignUp-nickname">
+    </center>
+    <h3 class="inside">Дата рождения</h3>
+    <center>
+        <input id="SignUp-date_of_birth">
+    </center>
+    <h3 class="inside">Пароль</h3>
+    <center>
+        <input id="SignUp-password" type="password">
+    </center>
+    <a href="#auth">
+        <h3 class="inside" onclick="SignUp();">Войти</h3>
+    </a>
+    <a href="#signIn">
+        <h3 class="inside" onclick="ShowSignInBlock();">Авторизация</h3>
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+<center>
+    <p style="font-size: 20px;">{{ user.username }} - {{ type }}({{ users.count }}):</p>
+</center>
+
+<div style="display: inline-block;">
+    {% for subscriber in users %}
+    <a href="/account/{{ subscriber.username }}?back=/account/{{ user.username}}/{{ hidden_type }}/">
+        <div class="user-block" style="display: inline-block;">
+            {% if subscriber.avatar %}
+            <img src="{{ subscriber.avatar.url }}">
+            {% else %}
+            <img src="{% static 'img/icons/account.png' %}">
+            {% endif %}
+
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

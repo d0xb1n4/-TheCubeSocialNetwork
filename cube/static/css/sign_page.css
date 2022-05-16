@@ -1,0 +1,18 @@
+.sign-block {
+    width: 300px;
+    margin-top: 100px;
+    margin-left: calc(50% - 150px);
+    word-break: break-all;
+    border: 1px solid gray;
+    position: fixed;
+    z-index: 1;
+}
+
+.inside {
+    margin-left: 20px;
+    margin-top: 30px;
+}
+
+#sign-up-block {
+    top: -1500px;
+}

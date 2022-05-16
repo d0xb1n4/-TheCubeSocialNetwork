@@ -1,0 +1,51 @@
+{% load static %}
+
+<style>
+    * {
+        font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+     }
+
+    .error-block {
+        width: 450px;
+        margin-left: calc(50% - 225px);
+        word-break: break-all;
+    }
+
+    a {
+        color: gray;
+        text-decoration: none;
+        transition: 0.5s;
+    }
+
+    a:hover {
+        color: black;
+    }
+</style>
+
+<link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
+<script src="{% static 'js/static_page_functions.js' %}"></script>
+<script src="{% static 'js/conditions.js' %}"></script>
+<script src="{% static 'js/index.js' %}"></script>
+<script src="{% static 'js/notify.js' %}"></script>
+<script src="{% static 'js/cookie.js' %}"></script>
+
+<a id="back-button" style="" href="">
+    <img style="position: absolute; top: 0; " class="icon pointer middle" src="{% static 'img/icons/back.png' %}">
+</a>
+
+<script>
+    showBackArrow();
+</script>
+
+<div class="error-block">
+    <h3 style="font-size: 50px;">Это страница 404.</h3>
+    <h3><br>1000010110110001000010100001111101000001000100000110001000010100010000001000011000010000111101100001110001000100011010000110000100000110100110000110100101110</h3>
+    <h3><br>Esta es una página 404.</h3>
+    <h3><br>Ceci est une page 404.</h3>
+    <h3><br>To jest strona 404.</h3>
+    <h3><br>This is a 404 page.</h3>
+    <h3><br>這是一個 404 頁面。</h3>
+    <a href="/">
+        <h3><br>Вернуться на главную.</h3>
+    </a>
+</div>

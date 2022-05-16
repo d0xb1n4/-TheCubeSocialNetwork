@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .conditions {
+        display: none;
+    }
+</style>
+<div class="post_create-block">
+    <h1>Создать запись</h1>
+    <h3>Тема поста</h3>
+    <input id="post-theme">
+    <h3>Текст</h3>
+    <textarea id="post-text"></textarea>
+
+    <a style="color: black;" onclick="ShowConditions(3);" class="link-conditions" id="link-conditions3"
+       href="#open-nickname-conditions">
+        <img style="left: -15px; position: absolute; cursor: pointer;" class="icon small"
+             src="{% static 'img/icons/clip.png' %}">
+        <p style="left: 40px; position: absolute; margin-top: 25px;">Вложение</p>
+    </a>
+    <div class="conditions" id="conditions3">
+        <br><br><br>
+        <p>• Загрузить изображение</p>
+        <input id="post-image" style="border: 1px solid gray;" type="file" accept="image/*">
+<!--        <p>• Загрузить музыку</p>-->
+<!--        <input id="post-music" style="border: 1px solid gray;" type="file" accept="audio/mp3">-->
+<!--        <p>• Загрузить документ</p>-->
+<!--        <input id="post-document" style="border: 1px solid gray;" type="file" accept="*/*">-->
+    </div>
+
+    <br><br><br><br>
+    <center>
+        <button onclick="CreatePost();">Опубликовать</button>
+    </center>
+</div>
+{% endblock %}

@@ -1,0 +1,151 @@
+{% extends 'index.html' %}
+{% load custom_filters %}
+{% load static %}
+
+
+{% block content %}
+
+<style>
+    .conditions {
+        display: none;
+    }
+</style>
+
+<div class="post_view-block">
+    {% if post.image %}
+    <img class="post-image" src="{{ post.image.url }}">
+    {% endif %}
+<!--    {% if post.music %}-->
+<!--    <audio style="width: 400px;" class="post-music" autoplay controls src="{{ post.music.url }}"></audio>-->
+<!--    {% endif %}-->
+    {% if not post.image %}
+            <div style="margin-left: 425px;" class="post-owner-block">
+        {% else %}
+            <div class="post-owner-block">
+        {% endif %}
+    {% if post.owner.avatar %}
+            <img class="owner-avatar" src="{{ post.owner.avatar.url }}">
+    {% else %}
+        <img class="account-avatar" src="{% static 'img/icons/account.png' %}">
+    {% endif %}
+    <div class="nicknames-block">
+        <h3>{{ post.owner.nickname }}</h3>
+        <a style="width: 250px;" href="/account/{{ post.owner.username }}?back=/post/{{ post.pk }}">
+            <p>@{{ post.owner.username }}</p>
+        </a>
+    </div>
+       <div style="margin-left: -250px; position: absolute;">
+            {% if request.user in user.subscribers.all %}
+                <button class="subscribe-button" id="subscribe_button" onclick="SubscribeToUser('{{ user.username }}');">
+                    Отписаться
+                </button>
+            {% else %}
+                <button class="subscribe-button" id="subscribe_button" onclick="SubscribeToUser('{{ user.username }}');">
+                    Подписаться
+                </button>
+            {% endif %}
+       </div>
+    </div>
+    {% if not post.image %}
+    <div class="post-non-image"></div>
+    {% endif %}
+    <p id="post-text" class="post-text">{{ post.text }}</p>
+    <div id="comments-block" style="display: none;">
+        {% if comments %}
+            <div style="position: absolute; margin-top: -280px; margin-left: 430px; display: inline-block;" class="add-comment-form">
+                <input id="comment-text" style="display: inline-block; width: 200px;" placeholder="комментарий">
+                <button style="display: inline-block;" onclick="CreateComment({{ post.pk }});">создать</button>
+            </div>
+        {% else %}
+            <div style="position: absolute; margin-top: -80px; margin-left: 430px; display: inline-block;" class="add-comment-form">
+                <input id="comment-text" style="display: inline-block; width: 200px;" placeholder="комментарий">
+                <button style="display: inline-block;" onclick="CreateComment({{ post.pk }});">создать</button>
+            </div>
+        {% endif %}
+
+        {% if comments %}
+            <div class="comments">
+                {% for comment in comments %}
+                    <div class="comment" id="comment{{ comment.pk }}">
+                        <div class="comment-owner-block">
+                            {% if comment.owner.avatar %}
+                                <img class="owner-avatar" src="{{ comment.owner.avatar.url }}">
+                            {% else %}
+                                <img class="owner-avatar" src="{% static 'img/icons/account.png' %}">
+                            {% endif %}
+
+                            <p class="owner-nickname">{{ comment.owner.nickname }}</p>
+                            <div class="comment-likes" style="cursor: pointer;" onclick="LikeComment({{ comment.pk }});">
+                                {% if request.user in comment.likes.all %}
+                                    <img width="20px" height="20px" id="comment-like-icon{{ comment.pk }}" src="{% static 'img/icons/like.png' %}">
+                                {% else %}
+                                    <img width="20px" height="20px" id="comment-like-icon{{ comment.pk }}" src="{% static 'img/icons/no_like.png' %}">
+                                {% endif %}
+                                <p class="comment-likes-count" id="comment-likes-count{{ comment.pk }}">{{ comment.likes.all.count }}</p>
+                            </div>
+
+                            {% if comment.owner == request.user %}
+                                <div class="comment-delete" style="margin-left: 100px; cursor: pointer;" onclick="DeleteComment({{ comment.pk }});">
+                                    {% if request.user in comment.likes.all %}
+                                        <img width="20px" height="20px" id="comment-like-icon{{ comment.pk }}" src="{% static 'img/icons/delete.png' %}">
+                                    {% else %}
+                                        <img width="20px" height="20px" id="comment-like-icon{{ comment.pk }}" src="{% static 'img/icons/delete.png' %}">
+                                    {% endif %}
+                                    <p>Удалить</p>
+                                </div>
+                            {% endif %}
+
+                            <a href="/account/{{ comment.owner.username }}/">
+                                <p class="owner-username">@{{ comment.owner.username }}</p>
+                            </a>
+                        </div><br>
+
+                        <p class="comment-text">{{ comment.text }}<br><br>{{ comment.date_of_creation|edit_data }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="post-text" style="margin-top: -200px; margin-left: 480px;">Комментариев нет.</p>
+        {% endif %}
+    </div>
+
+    <div class="icons">
+        <div id="comments-icon-block" onclick="ShowComments();" class="comments-icon">
+            <img id="comments-icon" class="icon small" src="{% static 'img/icons/comments.png' %}">
+            <p>{{ comments_count }}</p>
+        </div>
+        <div class="like-icon" onclick="LikePost({{ post.id }});">
+            {% if request.user in post.likes.all %}
+                <img id="like-icon" class="icon small" src="{% static 'img/icons/like.png' %}">
+            {% else %}
+                <img id="like-icon" class="icon small" src="{% static 'img/icons/no_like.png' %}">
+            {% endif %}
+            <p id="likes-count">{{ post.likes.all.count }}</p>
+        </div>
+        <div class="calendar-icon">
+            <img class="icon small" src="{% static 'img/icons/calendar.png' %}">
+            <p style="position: absolute; font-size: 15px;">{{ post.date_of_creation|edit_data }}</p>
+        </div>
+        {% if post.owner == request.user %}
+            <div style="position: absolute; top: 294px; left: 0px; cursor: pointer;" class="delete-icon" onclick="DeletePost({{ post.pk }});">
+                <img style="width: 27px; height: 27px;" class="icon small" src="{% static 'img/icons/delete.png' %}">
+                <p>Удалить</p>
+            </div>
+            <div style="left: 130px;" class="hashtag-icon">
+        {% else %}
+            <div class="hashtag-icon">
+        {% endif %}
+            <img class="icon small" src="{% static 'img/icons/hashtag.png' %}">
+            {% if post.theme %}
+            <p>{{ post.theme|truncatechars:50 }}</p>
+            {% else %}
+            <p>Без темы</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<br><br>
+<h1 class="resolution_not_supported">
+    Разрешение не поддерживается для просмотра записей.
+</h1>
+{% endblock %}

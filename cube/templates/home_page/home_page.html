@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+{% if posts %}
+    <div class="posts" style="margin-top: 0px;">
+        {% for post in posts %}
+            <a href="/post/{{ post.pk }}?back=/" style="color: black;">
+                <div class="post">
+                    {% if post.image %}
+                    <img class="post-short-img" src="{{ post.image.url }}">
+                    {% else %}
+                    <div class="post-short-non-img"></div>
+                    {% endif %}
+                    <h3>{{ post.text|truncatechars:20 }}</h3>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% else %}
+    <center>
+        <h1>
+            Записи отсутствуют.
+        </h1>
+    </center>
+{% endif %}
+
+{% endblock %}
