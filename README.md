@@ -1,12 +1,13 @@
 # TheCubeSocialNetwork
-Social network "CuBe" (DRF, Django, Js)
-
-
-#### ⚡️ Run:
+Social network "CuBe" (DRF, Django, Js)<br><br>
 
 in case of errors https://google.com/ will help you ;)<br><br>
 
-May manage.py be with you.
+May manage.py be with you.<br><br>
+
+#### ⚡️ Run:
+
+next:<br><br>
 
 <i>cd cube</i>
 
