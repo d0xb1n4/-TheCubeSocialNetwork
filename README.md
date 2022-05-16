@@ -1,4 +1,4 @@
-# ⚡️ TheCubeSocialNetwork
+# TheCubeSocialNetwork
 Social network "CuBe" (DRF, Django, Js)
 
 
